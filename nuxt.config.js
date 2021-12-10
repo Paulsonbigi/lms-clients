@@ -58,8 +58,8 @@ export default {
   ],
 
   axios: {
-    // proxy: true,
-    baseURL: 'http://localhost:8040'
+    proxy: true,
+    // baseURL: 'http://localhost:8040'
   },
 
   proxy: {

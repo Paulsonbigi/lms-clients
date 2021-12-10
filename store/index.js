@@ -26,7 +26,7 @@ export const mutations = {
 export const actions = {
   async userRegister({ commit }, registerData) {
     commit("SET_REGISTERING", true);
-    await this.$axios.$post("/user/create", registerData);
+    await this.$axios.$post("/api/user/create", registerData);
     commit("SET_REGISTERING", false);
   },
 

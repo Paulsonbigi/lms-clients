@@ -47,68 +47,68 @@ export const mutations = {
 export const actions = {
   async createNewBook({ commit }, bookData) {
     commit("SET_LOADING", true);
-    await this.$axios.$post("/book/create", bookData);
+    await this.$axios.$post("/api/book/create", bookData);
     commit("SET_LOADING", false);
   },
 
   async approveRequests({ commit },requestData) {
     console.log("the two params", requestData)
     commit("SET_LOADING", true);
-    await this.$axios.$patch("/admin/borrow-approve/"+ requestData.userId + '/' + requestData.bookId);
+    await this.$axios.$patch("/api/admin/borrow-approve/"+ requestData.userId + '/' + requestData.bookId);
     commit("SET_LOADING", false);
   },
 
   async updateRequests({ commit }, bookData) {
     commit("SET_LOADING", true);
-    await this.$axios.$patch("/admin/updates-record/"+ bookData);
+    await this.$axios.$patch("/api/admin/updates-record/"+ bookData);
     commit("SET_LOADING", false);
   },
 
   async getAllUsers({ commit },) {
     commit("SET_LOADING", true);
-    const { data }  = await this.$axios.$get("/user/get-users-only")
+    const { data }  = await this.$axios.$get("/api/user/get-users-only")
     commit('SET_ALL_USERS', data)
     commit("SET_LOADING", false)
   },
 
   async getAllPendingRequests({ commit },) {
     commit("SET_LOADING", true);
-    const { data }  = await this.$axios.$get("/admin/get-all-pending-requests")
+    const { data }  = await this.$axios.$get("/api/admin/get-all-pending-requests")
     commit('SET_PENDING_REQUESTS', data)
     commit("SET_LOADING", false)
   },
 
   async getAllApprovedRequests({ commit },) {
     commit("SET_LOADING", true);
-    const { data }  = await this.$axios.$get("/admin/get-all-approved-requests")
+    const { data }  = await this.$axios.$get("/api/admin/get-all-approved-requests")
     commit('SET_ALL_APPROVED_REQUESTS', data)
     commit("SET_LOADING", false)
   },
 
   async getPendingRequestsById({ commit }, requestId) {
     commit("SET_LOADING", true);
-    const { data }  = await this.$axios.$get("/admin/get-all-pending-requests/"+requestId)
+    const { data }  = await this.$axios.$get("/api/admin/get-all-pending-requests/"+requestId)
     commit('SET_PENDING_REQUESTS', data)
     commit("SET_LOADING", false)
   },
 
   async getAllBookRequests({ commit },) {
     commit("SET_LOADING", true);
-    const { data, bookDetails }  = await this.$axios.$get("/borrow/all-requests")
+    const { data, bookDetails }  = await this.$axios.$get("/api/borrow/all-requests")
     commit('SET_BOOK_REQUESTS', data, bookDetails)
     commit("SET_LOADING", false)
   },
 
   async getAllBookRequestsById({ commit }, requestId) {
     commit("SET_LOADING", true);
-    const data  = await this.$axios.$get("/borrow/all-requests/"+ requestId)
+    const data  = await this.$axios.$get("/api/borrow/all-requests/"+ requestId)
     commit('SET_BOOK_REQUESTS', data)
     commit("SET_LOADING", false)
   },
 
   async getAllBookRequestsWithSameId({ commit }, bookId) {
     commit("SET_LOADING", true);
-    const { data, bookDetails }  = await this.$axios.$get("/borrow/same-book-request/"+ bookId)
+    const { data, bookDetails }  = await this.$axios.$get("/api/borrow/same-book-request/"+ bookId)
     commit('SET_SAME_BOOKS', data, bookDetails)
     commit("SET_LOADING", false)
   },
