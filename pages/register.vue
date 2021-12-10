@@ -184,13 +184,6 @@ export default {
                 address: this.register.address,
                 role: 'user'
             }
-            if(!data){
-                this.$notify({
-                    group: 'auth',
-                    text: `Please enter all fields correctly to continue`,
-                    duration: 1500,
-                })
-            }
             await this.userRegister(data);
             if(this.registering = false){
                 

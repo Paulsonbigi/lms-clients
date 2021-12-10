@@ -94,13 +94,6 @@ export default {
     async signIn() {
         
         try{
-            if(!this.login.usernameEmail || !this.login.password){
-                this.$notify({
-                    group: 'auth',
-                    text: `Please enter all fields correctly to continue`,
-                    duration: 1500,
-                })
-            }
             await this.$auth.loginWith("local", {
                 data: {
                     email: this.login.usernameEmail,

@@ -49,7 +49,7 @@
 
                         <div class="d-flex flex-column justify-center">
                             <v-btn @click="signIn()" color="primary" block class="px-12 w-full bg-primary ">Login</v-btn>
-                            <nuxt-link to="/admin-register" class="text-center mt-2">
+                            <nuxt-link to="/register" class="text-center mt-2">
                                 <span class="accent--text text-center">Don't have an account?</span>
                             </nuxt-link>
                         </div>
@@ -94,13 +94,6 @@ export default {
     async signIn() {
         
         try{
-            if(!this.login.usernameEmail || !this.login.password){
-                this.$notify({
-                    group: 'auth',
-                    text: `Please enter all fields correctly to continue`,
-                    duration: 1500,
-                })
-            }
             await this.$auth.loginWith("local", {
                 data: {
                     email: this.login.usernameEmail,
@@ -113,11 +106,13 @@ export default {
                 text: `Welcome ...`,
                 duration: 1500,
             })
-                this.$router.push("/admins/dashboard")
+                this.$router.push("admins/dashboard")
         } catch(e){
-
+            
         }
       }
+    },
+    mounted() {
     },
 }
 </script>
