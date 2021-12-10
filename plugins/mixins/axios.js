@@ -3,7 +3,6 @@ export default function ({ $axios, store, app}){
     $axios.onError(error => {
 
         if (error){
-            console.log(error)
             if (error.response.status === 422) {
                 store.dispatch('validation/setErrors', error.response.data.errors ? error.response.data.errors : null)
 
@@ -13,15 +12,36 @@ export default function ({ $axios, store, app}){
                 
             }
             if (error.response.status === 400) {
-                store.dispatch('validation/setErrors', error.response.data.errors ? error.response.data.errors : null)
+                console.log("kmk", error.response.data.message)
+                let errors = {
+                    'other_error' : [error.response.data.message]
+                }
+                store.dispatch('validation/setErrors', errors ? errors : null)
+                app.$notify({
+                    group: 'auth',
+                    title: 'Important message',
+                    text: error.response.data.message,
+                    type: 'success',
+                    duration: 15000,
+                })
 
                 let messageData2 = {'text': error.response.data.message, 'target': null, 'type': 'info', 'time': null}
 
                 store.dispatch('message/setMessage', messageData2)
                
             }
-
             if (error.response.status === 401) {
+                let errors = {
+                    'general_error' : [error.response.data.message]
+                }
+                store.dispatch('validation/setErrors', errors ? errors : null)
+                app.$notify({
+                    group: 'auth',
+                    title: 'Important message',
+                    text: error.response.data.message,
+                    type: 'success',
+                    duration: 15000,
+                })
 
                 let messageData3 = {'text': "You're not logged in", 'target': null, 'type': 'danger', 'time': null}
 
@@ -53,7 +73,7 @@ export default function ({ $axios, store, app}){
                             title: 'Important message',
                             text: response.data.message,
                             type: 'success',
-                            duration: 15000,
+                            duration: 2000,
                         })
                     }
                 }
